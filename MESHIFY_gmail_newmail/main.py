@@ -8,6 +8,10 @@ import time
 gmail_url = "https://www.googleapis.com/gmail/v1/users/me/messages"
 
 def handler(event, context):
+    #remove credentials from event structure
+    accesstoken = event['accesstoken']
+    event['accesstoken']='***'
+
     print("event")
     print(event)
 
@@ -17,7 +21,7 @@ def handler(event, context):
     params = urllib.parse.urlencode({'q': 'after:'+yesterday_ts})
     print(params)
     request = urllib.request.Request(gmail_url+'?'+params)
-    request.add_header('Authorization','Bearer '+event['accesstoken'])
+    request.add_header('Authorization','Bearer '+accesstoken)
     result = []
     try:
         with urllib.request.urlopen(request) as response:
