@@ -142,12 +142,20 @@ def handler(event, context):
                     msg["subject"] = header["value"]
                 if header["name"]=="Date":
                     #sample: Sun, 22 Apr 2018 17:23:57 +0900
+                    #sample2: Sat, 21 Apr 2018 18:47:40 +0000 (UTC)
+                    #sample3: 23 Apr 2018 17:25:02 +0200
                     dateVal = header["value"]
-                    try:
-                        dx=datetime.datetime.strptime(dateVal, '%a, %d %b %Y %H:%M:%S %z')
-                    except:
-                        #sample2: 23 Apr 2018 17:25:02 +0200
-                        dx=datetime.datetime.strptime(dateVal, '%d %b %Y %H:%M:%S %z')
+                    #preset with default value
+                    dx=datetime.datetime.now()
+                    for date_format in [
+                        '%a, %d %b %Y %H:%M:%S %z',
+                        '%d %b %Y %H:%M:%S %z',
+                        '%a, %d %b %Y %H:%M:%S %z (%Z)']:
+                        try:
+                            dx=datetime.datetime.strptime(dateVal, date_format)
+                        except ValueError:
+                            pass
+
                     msg["date"] = dx.isoformat()
                 if header["name"]=="To":
                     tos.append(header["value"])
