@@ -1,77 +1,77 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: "meshify gmail"
+Description: "flows gmail"
 Resources:
-  MESHIFYgmailnewmailFunction:
+  newmailFunction:
     Type: AWS::Lambda::Function
     Properties:
-      Code: MESHIFY_gmail_newmail
+      Code: newmail
       Handler: main.handler
       Role:
         Fn::GetAtt: [ LambdaRole , Arn ]
       Runtime: python3.6
       Timeout: 300
-  MESHIFYgmailfetchmailFunction:
+  fetchmailFunction:
     Type: AWS::Lambda::Function
     Properties:
-      Code: MESHIFY_gmail_fetchmail
+      Code: fetchmail
       Handler: main.handler
       Role:
         Fn::GetAtt: [ LambdaRole , Arn ]
       Runtime: python3.6
       Timeout: 300
-  MESHIFYgmailfetchmailsimplifiedFunction:
+  fetchmailsimplifiedFunction:
     Type: AWS::Lambda::Function
     Properties:
-      Code: MESHIFY_gmail_fetchmailsimplified
+      Code: fetchmailsimplified
       Handler: main.handler
       Role:
         Fn::GetAtt: [ LambdaRole , Arn ]
       Runtime: python3.6
       Timeout: 300
-  MESHIFYgmailfetchmailrawFunction:
+  fetchmailrawFunction:
     Type: AWS::Lambda::Function
     Properties:
-      Code: MESHIFY_gmail_fetchmailraw
+      Code: fetchmailraw
       Handler: main.handler
       Role:
         Fn::GetAtt: [ LambdaRole , Arn ]
       Runtime: python3.6
       Timeout: 300
-  MESHIFYgmailfetchmailrawLogGroup:
+  fetchmailrawLogGroup:
     Type: AWS::Logs::LogGroup
     Properties:
       LogGroupName:
         Fn::Join:
           - ""
           - - "/aws/lambda/"
-            - Ref: MESHIFYgmailfetchmailrawFunction
+            - Ref: fetchmailrawFunction
       RetentionInDays: 7
-  MESHIFYgmailfetchmailsimplifiedLogGroup:
+  fetchmailsimplifiedLogGroup:
     Type: AWS::Logs::LogGroup
     Properties:
       LogGroupName:
         Fn::Join:
           - ""
           - - "/aws/lambda/"
-            - Ref: MESHIFYgmailfetchmailsimplifiedFunction
+            - Ref: fetchmailsimplifiedFunction
       RetentionInDays: 7
-  MESHIFYgmailfetchmailLogGroup:
+  fetchmailLogGroup:
     Type: AWS::Logs::LogGroup
     Properties:
       LogGroupName:
         Fn::Join:
           - ""
           - - "/aws/lambda/"
-            - Ref: MESHIFYgmailfetchmailFunction
+            - Ref: fetchmailFunction
       RetentionInDays: 7
-  MESHIFYgmailnewmailLogGroup:
+  newmailLogGroup:
     Type: AWS::Logs::LogGroup
     Properties:
       LogGroupName:
         Fn::Join:
           - ""
           - - "/aws/lambda/"
-            - Ref: MESHIFYgmailnewmailFunction
+            - Ref: newmailFunction
       RetentionInDays: 7
   LambdaRole:
     Type: AWS::IAM::Role
@@ -120,40 +120,40 @@ Resources:
               Action:
               - lambda:InvokeFunction
               Resource:
-              - Fn::GetAtt: [ MESHIFYgmailnewmailFunction , Arn ]
-              - Fn::GetAtt: [ MESHIFYgmailfetchmailFunction , Arn ]
-              - Fn::GetAtt: [ MESHIFYgmailfetchmailsimplifiedFunction , Arn ]
-              - Fn::GetAtt: [ MESHIFYgmailfetchmailrawFunction , Arn ]
+              - Fn::GetAtt: [ newmailFunction , Arn ]
+              - Fn::GetAtt: [ fetchmailFunction , Arn ]
+              - Fn::GetAtt: [ fetchmailsimplifiedFunction , Arn ]
+              - Fn::GetAtt: [ fetchmailrawFunction , Arn ]
 Outputs:
-  MESHIFYgmailnewmailFunction:
-    Description: '/MESHIFY/MESHIFY/gmail/newmail/lambda'
+  newmailFunction:
+    Description: 'newmail'
     Value:
-      Fn::GetAtt: [ MESHIFYgmailnewmailFunction , Arn ]
-  MESHIFYgmailnewmailRole:
-    Description: '/MESHIFY/MESHIFY/gmail/newmail/role'
-    Value:
-      Fn::GetAtt: [ InvokeRole , Arn ]
-  MESHIFYgmailfetchmailFunction:
-    Description: '/MESHIFY/MESHIFY/gmail/fetchmail/lambda'
-    Value:
-      Fn::GetAtt: [ MESHIFYgmailfetchmailFunction , Arn ]
-  MESHIFYgmailfetchmailRole:
-    Description: '/MESHIFY/MESHIFY/gmail/fetchmail/role'
+      Fn::GetAtt: [ newmailFunction , Arn ]
+  newmailRole:
+    Description: 'newmail'
     Value:
       Fn::GetAtt: [ InvokeRole , Arn ]
-  MESHIFYgmailfetchmailsimplifiedFunction:
-    Description: '/MESHIFY/MESHIFY/gmail/fetchmailsimplified/lambda'
+  fetchmailFunction:
+    Description: 'fetchmail'
     Value:
-      Fn::GetAtt: [ MESHIFYgmailfetchmailsimplifiedFunction , Arn ]
-  MESHIFYgmailfetchmailsimplifiedRole:
-    Description: '/MESHIFY/MESHIFY/gmail/fetchmailsimplified/role'
+      Fn::GetAtt: [ fetchmailFunction , Arn ]
+  fetchmailRole:
+    Description: 'fetchmail'
     Value:
       Fn::GetAtt: [ InvokeRole , Arn ]
-  MESHIFYgmailfetchmailrawFunction:
-    Description: '/MESHIFY/MESHIFY/gmail/fetchmailraw/lambda'
+  fetchmailsimplifiedFunction:
+    Description: 'fetchmailsimplified'
     Value:
-      Fn::GetAtt: [ MESHIFYgmailfetchmailrawFunction , Arn ]
-  MESHIFYgmailfetchmailrawRole:
-    Description: '/MESHIFY/MESHIFY/gmail/fetchmailraw/role'
+      Fn::GetAtt: [ fetchmailsimplifiedFunction , Arn ]
+  fetchmailsimplifiedRole:
+    Description: 'fetchmailsimplified'
+    Value:
+      Fn::GetAtt: [ InvokeRole , Arn ]
+  fetchmailrawFunction:
+    Description: 'fetchmailraw'
+    Value:
+      Fn::GetAtt: [ fetchmailrawFunction , Arn ]
+  fetchmailrawRole:
+    Description: 'fetchmailraw'
     Value:
       Fn::GetAtt: [ InvokeRole , Arn ]

@@ -1,0 +1,9 @@
+{
+    "id": "FLOWS/gmail/newmail",
+    "lambda": "lambda-arn",
+    "role": "iam-arn",
+    "type": "poller",
+    "description": "triggers whenever a new mail arrives within the mailbox",
+    "icon": "https://flows.app/favicon.png",
+    "billing": "standard"
+}

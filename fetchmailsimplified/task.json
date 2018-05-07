@@ -1,0 +1,9 @@
+{
+    "id": "FLOWS/gmail/fetchmailsimplified",
+    "lambda": "lambda-arn",
+    "role": "iam-arn",
+    "type": "task",
+    "description": "fetches the mail content form google mail in a simplified mail format",
+    "icon": "https://flows.app/favicon.png",
+    "billing": "standard"
+}
